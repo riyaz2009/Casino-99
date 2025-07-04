@@ -3,30 +3,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Slot Machine Game</title>
+  <title>Slot Machine - Tk Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 100px;
-      background-color: #111;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d0d0d;
       color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
     }
     .slot {
-      font-size: 60px;
+      font-size: 3em;
+      margin: 20px 0;
+    }
+    .money {
+      font-size: 1.2em;
+      margin: 10px 0;
     }
     button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin-top: 20px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #218838;
+    }
+    #result {
+      font-size: 1.3em;
+      margin-top: 15px;
+    }
+    @media (max-width: 500px) {
+      .slot {
+        font-size: 2.5em;
+      }
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🎰 Slot Machine Game</h1>
+  <h1>🎰 Slot Machine - Tk Game</h1>
+  <div class="money">Your Balance: <span id="money">৳0</span></div>
   <div class="slot" id="slot">🍒🍋🍇</div>
   <button onclick="spin()">Spin</button>
   <p id="result"></p>
+
+  <audio id="spinSound" src="spin.mp3"></audio>
+  <audio id="winSound" src="win.mp3"></audio>
+  <audio id="loseSound" src="lose.mp3"></audio>
 
   <script src="script.js"></script>
 </body>
