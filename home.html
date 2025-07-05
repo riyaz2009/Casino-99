@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Casino-99 Google Login</title>
+  <title>Casino-99 হোম</title>
 </head>
 <body>
-  <h2>Casino-99 এ স্বাগতম</h2>
-  <button id="loginBtn">Google দিয়ে লগইন করো</button>
+  <h2>Casino-99 হোমপেজ</h2>
+  <p id="userName">লগইন তথ্য লোড হচ্ছে...</p>
+  <button id="logoutBtn">লগআউট করো</button>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
@@ -27,21 +28,20 @@
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("userName").innerText = `স্বাগতম, ${user.displayName}`;
+      } else {
+        window.location.href = "index.html";
+      }
+    });
 
-    function signInWithGoogle() {
-      auth.signInWithPopup(provider)
-        .then(result => {
-          const user = result.user;
-          alert(`স্বাগতম ${user.displayName}`);
-          window.location.href = "home.html";
-        })
-        .catch(error => {
-          alert("লগইন করতে সমস্যা হয়েছে: " + error.message);
-        });
-    }
-
-    document.getElementById("loginBtn").addEventListener("click", signInWithGoogle);
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      auth.signOut().then(() => {
+        alert("সফলভাবে লগআউট হয়েছে");
+        window.location.href = "index.html";
+      });
+    });
   </script>
 </body>
 </html>
