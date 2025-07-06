@@ -1,20 +1,46 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casino-99</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; background: #111; color: #fff; }
-    .game-card { background: #222; margin: 10px; padding: 20px; border-radius: 10px; display: inline-block; width: 200px; }
-    a { color: #0f0; text-decoration: none; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casino 99 Lobby</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 </head>
 <body>
-  <h1>🎰 Casino-99 🎲</h1>
-  <div class="game-card"><a href="games/slot/index.html">Play Slot</a></div>
-  <div class="game-card"><a href="games/aviator/index.html">Play Aviator</a></div>
-  <script src="scripts/firebase-auth.js"></script>
+  <div class="container">
+    <header>
+      <h1>🎰 ক্যাসিনো ৯৯</h1>
+      <div class="user-info" id="user-info" style="display:none;">
+        <img id="user-pic" src="" alt="User Pic" />
+        <span id="user-name"></span>
+        <span id="balance">৳0.00</span>
+        <button onclick="handleDeposit()">ডিপোজিট</button>
+        <button onclick="handleWithdraw()">উত্তোলন</button>
+        <button onclick="logout()">লগআউট</button>
+      </div>
+      <button id="login-btn" onclick="login()">🔐 Google লগইন</button>
+    </header>
+
+    <section class="games" id="game-section" style="display:none;">
+      <h2>🎮 গেমস</h2>
+      <div class="game-list">
+        <div class="game-card">🎰 Slot</div>
+        <div class="game-card">✈️ Aviator</div>
+        <div class="game-card">💰 Money Game</div>
+      </div>
+    </section>
+
+    <section class="admin" id="admin-panel" style="display:none;">
+      <h2>🛠️ অ্যাডমিন প্যানেল</h2>
+      <p>ইউজারের ইমেইল লিখে টাকা যোগ করুন:</p>
+      <input type="text" id="target-email" placeholder="ইমেইল লিখুন" />
+      <input type="number" id="add-amount" placeholder="টাকা (৳)" />
+      <button onclick="addBalance()">টাকা যোগ করুন</button>
+    </section>
+  </div>
 </body>
 </html>
